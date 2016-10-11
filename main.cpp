@@ -145,16 +145,17 @@ struct node{
 };
 
 
+
+
 int main()
 {
     ifstream file("numbers.txt");
     string line;
     int i;
     //getline(file,line);
-    node * hold;
-    node * head = new node;
-    head->next = nullptr;
-    hold = head;
+    node * hold = new node;
+    node * head;
+    head = nullptr;
     hold->next = nullptr;
 
     while(file.good())
@@ -187,18 +188,27 @@ int main()
         }
 
         cout << "before ptrs";
-        node * ptr = head;
-        while(ptr->next != nullptr){
-            ptr = ptr->next;
+        if(head == nullptr){
+            head = hold;
+            head->next = nullptr;
+        }
+
+        node * cur = head;
+        while(cur->next){
+            cur = cur->next;
             cout << "looped";
         }
-        ptr->next = hold;
+        cur->next = hold;
+
+        cout << "cur set";
 
         hold = new node;
         hold->next = nullptr;
         cout << "in while loop";
 
     }
+
+    cout << endl << endl << head->next->next->next->roman;
 
     //interface
 
@@ -207,12 +217,14 @@ int main()
     file.close();
     ofstream fileO("numbers.txt");
     node*ptr = head;
-    while(ptr->next != NULL){
+    fileO << "open";
+    while(ptr){
         fileO << ptr->roman;
         for(int i = 0; i + ptr->roman.length() < 20;i++){
             fileO << " ";
         }
         fileO << ptr->arabic << endl;
+        ptr = ptr->next;
     }
 
 
