@@ -135,6 +135,12 @@ bool decInvalid(string str){
 }
 
 bool romInvalid(string str){
+    for(int i = 0;i < str.length();i++){
+        if(str[i] != 'I' || str[i] != 'V' || str[i] != 'X' || str[i] != 'L' || str[i] != 'C' || str[i] != 'D' ||str[i] != 'M'){
+            return true;
+        }
+    }
+
     return false;
 }
 
