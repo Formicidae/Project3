@@ -144,7 +144,29 @@ struct node{
     node*next;
 };
 
+void EnQueue(node *&head,string rom,int arabic)
+{
+    cout << endl << "EnQueue" << endl;
+    node *newNode = new node;
+    newNode->roman = rom;
+    newNode->arabic = arabic;
+    newNode->next = nullptr;
 
+    if(head == nullptr){
+        head = newNode;
+        return;
+    }
+
+    node *cur = head;
+    while(cur->next != nullptr){
+        cout<< "EnQueue loop" <<endl;
+        cur = cur->next;
+    }
+    cur->next = newNode;
+    cout << endl << "EnQueue" << endl;
+    cout<< endl<< head->roman << endl<< endl;
+    return;
+}
 
 
 int main()
@@ -173,20 +195,23 @@ int main()
             myStream >> i;
             cout << line.substr(16,20);
             cout << i;
-            hold->arabic = i;
-            hold->roman = convertToRoman(i);
-            cout << hold->roman;
+            EnQueue(head,convertToRoman(i), i);
+            //hold->arabic = i;
+            //hold->roman = convertToRoman(i);
+            //cout << hold->roman;
         }
         else{
             cout << "else";
             if(romInvalid(line.substr(0,16))){
                 continue;
             }
-            hold->roman = line.substr(0,16);
-            hold->arabic = convertToArabic(hold->roman);
-            cout << hold->arabic;
+            EnQueue(head,line.substr(0,16), convertToArabic(line.substr(0,16)));
+            //hold->roman = line.substr(0,16);
+            //hold->arabic = convertToArabic(hold->roman);
+            //cout << hold->arabic;
         }
 
+        /*
         cout << "before ptrs";
         if(head == nullptr){
             head = hold;
@@ -194,21 +219,25 @@ int main()
         }
 
         node * cur = head;
-        while(cur->next){
+        while(cur != nullptr){
+            if(cur->next == nullptr){
+                cur->next = hold;
+            }
             cur = cur->next;
             cout << "looped";
         }
         cur->next = hold;
+
 
         cout << "cur set";
 
         hold = new node;
         hold->next = nullptr;
         cout << "in while loop";
-
+*/
     }
 
-    cout << endl << endl << head->next->next->next->roman;
+    //cout << endl << endl << head->next->next->next->roman;
 
     //interface
 
@@ -217,8 +246,8 @@ int main()
     file.close();
     ofstream fileO("numbers.txt");
     node*ptr = head;
-    fileO << "open";
-    while(ptr){
+    while(ptr != nullptr){
+            cout<< "print";
         fileO << ptr->roman;
         for(int i = 0; i + ptr->roman.length() < 20;i++){
             fileO << " ";
