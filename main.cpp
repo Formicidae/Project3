@@ -136,7 +136,8 @@ bool decInvalid(string str){
 
 bool romInvalid(string str){
     for(int i = 0;i < str.length();i++){
-        if(str[i] != 'I' || str[i] != 'V' || str[i] != 'X' || str[i] != 'L' || str[i] != 'C' || str[i] != 'D' ||str[i] != 'M'){
+        if(str[i] != ' ' && str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'C' && str[i] != 'D' && str[i] != 'M'){
+            cout<< endl << "problem char:" << str[i] << ":" << endl;
             return true;
         }
     }
