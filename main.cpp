@@ -247,6 +247,24 @@ int main()
     //cout << endl << endl << head->next->next->next->roman;
 
     //interface
+    int choice = 0;
+    bool stage1 = true;
+    while(stage1){
+        cout << "Enter 1,2, or three to chose"<< endl;
+        cout << "\t1\tSearch" << endl;
+        cout << "\t2\tSort" << endl;
+        cout << "\t3\tExit" << endl;
+        cin >> choice;
+        switch(choice)
+        case 1:
+            cout << "What would you like to search for" << endl;
+            cin >> target;
+            if(!romInvalid(target)){
+                lSearch(head,convertToArabic(head))
+            }
+
+
+    }
 
 
     //output to file
