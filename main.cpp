@@ -175,6 +175,16 @@ void EnQueue(node *&head,string rom,int arabic)
     return;
 }
 
+void lSearch(node*,int num){
+    cout << "Method isn't finsihed";
+}
+
+void SortR(node*){
+}
+
+void SortD(node*){
+}
+
 
 int main()
 {
@@ -248,22 +258,53 @@ int main()
 
     //interface
     int choice = 0;
+    string target;
     bool stage1 = true;
     while(stage1){
-        cout << "Enter 1,2, or three to chose"<< endl;
+        cout << endl << "Enter 1,2, or three to chose"<< endl;
         cout << "\t1\tSearch" << endl;
         cout << "\t2\tSort" << endl;
         cout << "\t3\tExit" << endl;
         cin >> choice;
-        switch(choice)
+        switch(choice){
         case 1:
             cout << "What would you like to search for" << endl;
             cin >> target;
             if(!romInvalid(target)){
-                lSearch(head,convertToArabic(head))
+                lSearch(head,convertToArabic(target));
             }
+            else if(!decInvalid(target)){
+                stringstream myStream(target);
+                int i;
+                myStream >> i;
+                lSearch(head,i);
+            }
+            else{
+                cout << "Invalid Input" << endl;
+            }
+            break;
+        case 2:{
+            bool stage2 = true;
+            while(stage2){
+                cout << endl << "\t1\tby Romman" << endl;
+                cout << "\t2\tby Arabic" << endl;
+                int choice2;
+                cin >> choice2;
+                switch(choice2){
+                case 1:
+                    SortR(head);stage2 = false;break;
+                case 2:
+                    SortD(head);stage2 = false;break;
+                default:
+                    cout << "Invalid Input" << endl;break;
+                }
+            }
+        }
+        case 3:
+            stage1 = false;
+            break;
 
-
+    }
     }
 
 
