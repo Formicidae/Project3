@@ -175,14 +175,51 @@ void EnQueue(node *&head,string rom,int arabic)
     return;
 }
 
-void lSearch(node*,int num){
-    cout << "Method isn't finsihed";
+void lSearch(node*head,int num){
+    //cout << "Method isn't finsihed";
+    node* cur = head;
+    while(cur){
+        if(cur->arabic == num){
+            cout << endl << num << " Was found.";
+        }
+        cur = cur->next;
+    }
 }
 
 void SortR(node*){
 }
 
-void SortD(node*){
+void SortD(node*&head){
+    node * prev;
+    node*cur;
+    node*after;
+
+    if(head->arabic > head->next->arabic){
+            cur = head->next;
+            head->next = head->next->next;
+            cur->next = head;
+            head = cur;
+        }
+
+    cur = head;
+    while(cur->next != nullptr){
+        after = cur->next;
+        if(cur->arabic > after->arabic){
+            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+            prev->next = cur->next;
+            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+            cur->next->next = cur;
+            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+            cur->next = after->next;
+            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+        }
+
+        //cout << "sorting";
+        prev = cur;
+        cur = cur->next;
+        cout << cur->arabic;
+    }
+
 }
 
 
