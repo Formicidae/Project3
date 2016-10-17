@@ -193,33 +193,34 @@ void SortD(node*&head){
     node * prev;
     node*cur;
     node*after;
-
-    if(head->arabic > head->next->arabic){
-            cur = head->next;
-            head->next = head->next->next;
-            cur->next = head;
-            head = cur;
-        }
+    bool swapped;
 
     cur = head;
-    while(cur->next != nullptr){
-        after = cur->next;
-        if(cur->arabic > after->arabic){
-            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
-            prev->next = cur->next;
-            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
-            cur->next->next = cur;
-            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
-            cur->next = after->next;
-            cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+    swapped = true;
+    while(swapped){
+        swapped = false;
+        while(cur->next != nullptr){
+            after = cur->next;
+            if(cur->arabic > after->arabic){
+                if(prev == nullptr){
+                    head = after;
+                    cur->next = after->next;
+                    after->next = cur;
+                }
+                else{
+                cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
+                prev->next = cur->next;
+                cur->next = after->next;
+                after->next = cur;
+                }
+                swapped = true;
+
+            }
+            prev = cur;
+            cur = cur->next;
+            cout << cur->arabic << endl;
         }
-
-        //cout << "sorting";
-        prev = cur;
-        cur = cur->next;
-        cout << cur->arabic;
     }
-
 }
 
 
