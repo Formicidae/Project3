@@ -186,15 +186,11 @@ void lSearch(node*head,int num){
     }
 }
 
-void SortR(node*){
-}
-
-void SortD(node*&head){
+void SortR(node*&head){
     node * prev;
     node*cur;
     node*after;
     bool swapped;
-    int count = 0;
 
     cur = head;
     swapped = true;
@@ -204,45 +200,57 @@ void SortD(node*&head){
         prev = nullptr;
         while(cur->next != nullptr){
             after = cur->next;
-            cout << "cur: " << cur->arabic << " Next is: " << cur->next->arabic << endl;
+            if(cur->roman > cur->next->roman){
+                if(prev == nullptr){
+                    head = after;
+                    cur->next = after->next;
+                    after->next = cur;
+                }
+                else{
+                prev->next = cur->next;
+                cur->next = after->next;
+                after->next = cur;
+                }
+                swapped = true;
+
+            }
+            prev = cur;
+            cur = after;
+        }
+    }
+}
+
+void SortD(node*&head){
+    node * prev;
+    node*cur;
+    node*after;
+    bool swapped;
+
+    cur = head;
+    swapped = true;
+    while(swapped){
+        swapped = false;
+        cur = head;
+        prev = nullptr;
+        while(cur->next != nullptr){
+            after = cur->next;
             if(cur->arabic > cur->next->arabic){
                 if(prev == nullptr){
                     head = after;
                     cur->next = after->next;
                     after->next = cur;
-                    cout << "head";
                 }
                 else{
-                cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
                 prev->next = cur->next;
                 cur->next = after->next;
-                cout << "Before after\n";
                 after->next = cur;
-                cout << "After\n";
                 }
                 swapped = true;
-                cout << "swapped has been set";
 
             }
             prev = cur;
             cur = after;
-
-            cout << cur->arabic << endl;
-            node*printer = head;
-
-            cout<<"Start Print";
-            while(printer->next){
-                count++;
-                //cout<<printer->arabic <<endl;
-                printer = printer->next;
-                if(count > 9999){
-                    return;
-                }
-
-            }
-
         }
-        cout << "Looped Meain bubble loop =================="<<endl;
     }
 }
 
@@ -251,6 +259,9 @@ bool binSearch(node*head,int length,int target){
     int count = 0;
     while(cur->next && count < (length / 2)){
             count++;
+            cout << cur->arabic;
+                cur = cur->next;
+    }
             if(cur->arabic == target){
                 return true;
             }
@@ -260,7 +271,8 @@ bool binSearch(node*head,int length,int target){
             else if(cur->arabic > target){
                 return binSearch(cur,length / 2,target);
             }
-    }
+
+
 
 }
 
@@ -292,9 +304,6 @@ int main()
             cout << line.substr(16,20);
             cout << i;
             EnQueue(head,convertToRoman(i), i);
-            //hold->arabic = i;
-            //hold->roman = convertToRoman(i);
-            //cout << hold->roman;
         }
         else{
             cout << "else";
@@ -302,14 +311,10 @@ int main()
                 continue;
             }
             EnQueue(head,line.substr(0,16), convertToArabic(line.substr(0,16)));
-            //hold->roman = line.substr(0,16);
-            //hold->arabic = convertToArabic(hold->roman);
-            //cout << hold->arabic;
         }
 
     }
 
-    //cout << endl << endl << head->next->next->next->roman;
 
     //interface
     int choice = 0;
@@ -358,6 +363,7 @@ int main()
                 cout << "\t2\tby Arabic" << endl;
                 int choice2;
                 cin >> choice2;
+                cin.clear();
                 switch(choice2){
                 case 1:
                     SortR(head);stage2 = false;break;
