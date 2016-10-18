@@ -246,6 +246,24 @@ void SortD(node*&head){
     }
 }
 
+bool binSearch(node*head,int length,int target){
+    node*cur = head;
+    int count = 0;
+    while(cur->next && count < (length / 2)){
+            count++;
+            if(cur->arabic == target){
+                return true;
+            }
+            else if(cur->arabic < target){
+                return binSearch(head, length / 2, target );
+            }
+            else if(cur->arabic > target){
+                return binSearch(cur,length / 2,target);
+            }
+    }
+
+}
+
 
 int main()
 {
@@ -314,7 +332,20 @@ int main()
                 stringstream myStream(target);
                 int i;
                 myStream >> i;
-                lSearch(head,i);
+                node*countP = head;
+                int count = 1;
+                while(countP->next){
+                    count++;
+                    countP = countP->next;
+                }
+                cout << "\n List is " << count << " \nElements long";
+                //lSearch(head,i);
+                if(binSearch(head,count,i)){
+                    cout << i << " Was found";
+                }
+                else{
+                    cout << i << " Wasn't found";
+                }
             }
             else{
                 cout << "Invalid Input" << endl;
@@ -336,6 +367,7 @@ int main()
                     cout << "Invalid Input" << endl;break;
                 }
             }
+            break;
         }
         case 3:
             stage1 = false;
