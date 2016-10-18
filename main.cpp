@@ -259,21 +259,26 @@ bool binSearch(node*head,int length,int target){
     int count = 0;
     while(cur->next && count < (length / 2)){
             count++;
-            cout << cur->arabic;
+            //cout << cur->arabic << " ";
                 cur = cur->next;
     }
+    //cout << "Finished while";
+            if(length == 1){
+                if(cur->arabic == target){
+                    return true;
+                }
+                return false;
+            }
+
             if(cur->arabic == target){
                 return true;
             }
-            else if(cur->arabic < target){
+            else if(cur->arabic > target){
                 return binSearch(head, length / 2, target );
             }
-            else if(cur->arabic > target){
-                return binSearch(cur,length / 2,target);
+            else if(cur->arabic < target){
+                return binSearch(cur,(length / 2) + 1,target);
             }
-
-
-
 }
 
 
@@ -337,6 +342,7 @@ int main()
                 stringstream myStream(target);
                 int i;
                 myStream >> i;
+                SortD(head);
                 node*countP = head;
                 int count = 1;
                 while(countP->next){
@@ -346,10 +352,10 @@ int main()
                 cout << "\n List is " << count << " \nElements long";
                 //lSearch(head,i);
                 if(binSearch(head,count,i)){
-                    cout << i << " Was found";
+                    cout << endl << i << " Was found";
                 }
                 else{
-                    cout << i << " Wasn't found";
+                    cout << endl << i << " Wasn't found";
                 }
             }
             else{
