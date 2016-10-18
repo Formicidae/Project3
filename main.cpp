@@ -194,32 +194,55 @@ void SortD(node*&head){
     node*cur;
     node*after;
     bool swapped;
+    int count = 0;
 
     cur = head;
     swapped = true;
     while(swapped){
         swapped = false;
+        cur = head;
+        prev = nullptr;
         while(cur->next != nullptr){
             after = cur->next;
-            if(cur->arabic > after->arabic){
+            cout << "cur: " << cur->arabic << " Next is: " << cur->next->arabic << endl;
+            if(cur->arabic > cur->next->arabic){
                 if(prev == nullptr){
                     head = after;
                     cur->next = after->next;
                     after->next = cur;
+                    cout << "head";
                 }
                 else{
                 cout << prev->arabic << " " << cur->arabic << " " << after->arabic <<  " \n";
                 prev->next = cur->next;
                 cur->next = after->next;
+                cout << "Before after\n";
                 after->next = cur;
+                cout << "After\n";
                 }
                 swapped = true;
+                cout << "swapped has been set";
 
             }
             prev = cur;
-            cur = cur->next;
+            cur = after;
+
             cout << cur->arabic << endl;
+            node*printer = head;
+
+            cout<<"Start Print";
+            while(printer->next){
+                count++;
+                //cout<<printer->arabic <<endl;
+                printer = printer->next;
+                if(count > 9999){
+                    return;
+                }
+
+            }
+
         }
+        cout << "Looped Meain bubble loop =================="<<endl;
     }
 }
 
@@ -266,30 +289,6 @@ int main()
             //cout << hold->arabic;
         }
 
-        /*
-        cout << "before ptrs";
-        if(head == nullptr){
-            head = hold;
-            head->next = nullptr;
-        }
-
-        node * cur = head;
-        while(cur != nullptr){
-            if(cur->next == nullptr){
-                cur->next = hold;
-            }
-            cur = cur->next;
-            cout << "looped";
-        }
-        cur->next = hold;
-
-
-        cout << "cur set";
-
-        hold = new node;
-        hold->next = nullptr;
-        cout << "in while loop";
-*/
     }
 
     //cout << endl << endl << head->next->next->next->roman;
@@ -351,7 +350,7 @@ int main()
     ofstream fileO("numbers.txt");
     node*ptr = head;
     while(ptr != nullptr){
-            cout<< "print";
+            //cout<< "print";
         fileO << ptr->roman;
         for(int i = 0; i + ptr->roman.length() < 20;i++){
             fileO << " ";
