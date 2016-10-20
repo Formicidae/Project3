@@ -281,6 +281,23 @@ bool binSearch(node*head,int length,int target){
             }
 }
 
+node* copy(node*head){
+    node*head2;
+
+    node*cur = head2;
+    //cur = new node{head->roman,head->arabic,nullptr};
+
+    while(head){
+        cur->next = new node{head->roman,head->arabic,nullptr};
+        head=head->next;
+        cur = cur->next;
+    }
+
+    return head2;
+
+
+}
+
 
 int main()
 {
@@ -335,15 +352,17 @@ int main()
         case 1:
             cout << "What would you like to search for" << endl;
             cin >> target;
+
+
             if(!romInvalid(target)){
-                lSearch(head,convertToArabic(target));
-            }
-            else if(!decInvalid(target)){
-                stringstream myStream(target);
-                int i;
-                myStream >> i;
-                SortD(head);
-                node*countP = head;
+                //Don't remove
+                cout << "";
+                node*head2 = copy(head);
+                SortD(head2);
+
+                i = convertToArabic(target);
+
+                node*countP = head2;
                 int count = 1;
                 while(countP->next){
                     count++;
@@ -351,7 +370,35 @@ int main()
                 }
                 cout << "\n List is " << count << " \nElements long";
                 //lSearch(head,i);
-                if(binSearch(head,count,i)){
+                if(binSearch(head2,count,i)){
+                    cout << endl << i << " Was found";
+                }
+                else{
+                    cout << endl << i << " Wasn't found";
+                }
+                break;
+            }
+
+
+            if(!decInvalid(target)){
+                //Don't remove
+                cout << "";
+                node*head2 = copy(head);
+                SortD(head2);
+
+                stringstream myStream(target);
+                int i;
+                myStream >> i;
+
+                node*countP = head2;
+                int count = 1;
+                while(countP->next){
+                    count++;
+                    countP = countP->next;
+                }
+                cout << "\n List is " << count << " \nElements long";
+                //lSearch(head,i);
+                if(binSearch(head2,count,i)){
                     cout << endl << i << " Was found";
                 }
                 else{
