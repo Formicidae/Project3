@@ -131,7 +131,13 @@ string convertToRoman(int num) {
 }
 
 bool decInvalid(string str){
-    return false;
+    stringstream myStream(str);
+    int i;
+    myStream >> i;
+    if(i > 0 && i < 4999){
+        return false;
+    }
+    return true;
 }
 
 bool romInvalid(string str){
@@ -376,6 +382,7 @@ int main()
                 else{
                     cout << endl << i << " Wasn't found";
                 }
+                delete head2;
                 break;
             }
 
@@ -404,6 +411,7 @@ int main()
                 else{
                     cout << endl << i << " Wasn't found";
                 }
+                delete head2;
             }
             else{
                 cout << "Invalid Input" << endl;
@@ -450,6 +458,6 @@ int main()
         ptr = ptr->next;
     }
 
-
+    delete head;
     return 0;
 }
