@@ -1,4 +1,8 @@
 //Edward Bates emb160030 Project 3
+//BINARY SEARCH LINES 331 - ###, CALL LINE ###
+//INPUT VALIDATION
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -147,6 +151,72 @@ bool romInvalid(string str){
             return true;
         }
     }
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'I'){
+            for(int j = i;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != ' '){
+                    cout << "I Check\n:" << str[j] << ":\n" ;
+                    return true;
+                }
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'V'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != ' '){
+                    cout << "V Check\n:" << str[j] << ":\n" ;
+                    return true;
+                }
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'X'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != ' ')
+                    return true;
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'L'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != ' ')
+                    return true;
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'C'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != 'C' && str[j] != 'L' && str[j] != ' ')
+                    return true;
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'D'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X'&& str[j] != 'C'&& str[j] != 'L' && str[j] != ' ')
+                    return true;
+            }
+        }
+    }
+
+    for(int i = 0;i < str.length();i++){
+        if(str[i] == 'M'){
+            for(int j = i+1;j < str.length();j++){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X'&& str[j] != 'C'&& str[j] != 'L'&& str[j] != 'D' && str[j] != 'M' && str[j] != ' ')
+                    return true;
+            }
+        }
+    }
 
     return false;
 }
@@ -159,7 +229,7 @@ struct node{
 
 void EnQueue(node *&head,string rom,int arabic)
 {
-    cout << endl << "EnQueue" << endl;
+    //cout << endl << "EnQueue" << endl;
     node *newNode = new node;
     newNode->roman = rom;
     newNode->arabic = arabic;
