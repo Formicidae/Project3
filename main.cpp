@@ -131,7 +131,13 @@ string convertToRoman(int num) {
 }
 
 bool decInvalid(string str){
-    return false;
+    stringstream myStream(str);
+    int i;
+    myStream >> i;
+    if(i > 0 && i < 4999){
+        return false;
+    }
+    return true;
 }
 
 bool romInvalid(string str){
@@ -176,7 +182,6 @@ void EnQueue(node *&head,string rom,int arabic)
 }
 
 void lSearch(node*head,int num){
-    //cout << "Method isn't finsihed";
     node* cur = head;
     while(cur){
         if(cur->arabic == num){
@@ -347,6 +352,7 @@ int main()
         cout << "\t1\tSearch" << endl;
         cout << "\t2\tSort" << endl;
         cout << "\t3\tExit" << endl;
+        choice = 0;
         cin >> choice;
         switch(choice){
         case 1:
@@ -404,6 +410,7 @@ int main()
                 else{
                     cout << endl << i << " Wasn't found";
                 }
+                delete head2;
             }
             else{
                 cout << "Invalid Input" << endl;
@@ -423,7 +430,11 @@ int main()
                 case 2:
                     SortD(head);stage2 = false;break;
                 default:
-                    cout << "Invalid Input" << endl;break;
+                    cout << "Invalid Input" << endl;
+                    choice2 = 0;
+                    cin.clear();
+                    cin.ignore(256, '\n');
+                    break;
                 }
             }
             break;
@@ -431,8 +442,14 @@ int main()
         case 3:
             stage1 = false;
             break;
+        default:
+            cout << "Invalid Choice";
+            choice = 0;
+            cin.clear();
+            cin.ignore(256, '\n');
+            //break;
 
-    }
+        }
     }
 
 
@@ -450,6 +467,6 @@ int main()
         ptr = ptr->next;
     }
 
-
+    delete head;
     return 0;
 }
