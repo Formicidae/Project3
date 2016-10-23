@@ -474,7 +474,13 @@ int main()
                 else{
                     cout << endl << i << " Wasn't found";
                 }
-                delete head2;
+                //Cleans up memory
+                node*ptr = head2;
+                while(ptr != nullptr){
+                    node*tmp = ptr;
+                    ptr = ptr->next;
+                    delete tmp;
+                }
                 break;
             }
 
@@ -504,7 +510,14 @@ int main()
                 else{
                     cout << endl << i << " Wasn't found";
                 }
-                delete head2;
+
+                //Cleans up memory
+                node*ptr = head2;
+                while(ptr != nullptr){
+                    node*tmp = ptr;
+                    ptr = ptr->next;
+                    delete tmp;
+                }
             }
             else{
                 cout << "Invalid Input" << endl;
@@ -558,14 +571,14 @@ int main()
     node*ptr = head;
     //Prints each node from list on a line into the file
     while(ptr != nullptr){
+        node* tmp = ptr;
         fileO << ptr->roman;
         for(int i = 0; i + ptr->roman.length() < 20;i++){
             fileO << " ";
         }
         fileO << ptr->arabic << endl;
         ptr = ptr->next;
+        delete tmp;
     }
-
-    delete head;
     return 0;
 }
