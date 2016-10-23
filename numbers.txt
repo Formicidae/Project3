@@ -1,7 +1,9 @@
 II                  2
 XXVII               27
+XXVII               27
 LVI                 56
 CXXIII              123
+MC                  1100
 MCIV                1104
 MCLXV               1165
 MCLXV               1165
