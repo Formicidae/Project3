@@ -402,6 +402,7 @@ int main()
     node * head;
     head = nullptr;
     hold->next = nullptr;
+    node * noConflict;
 
     //Reads each line of file
     while(file.good())
@@ -523,9 +524,21 @@ int main()
                 //determines the search to be preformed
                 switch(choice2){
                 case 1:
-                    SortR(head);stage2 = false;break;
+                    SortR(head);
+                    noConflict = head;
+                    while(noConflict){
+                        cout << noConflict->roman << endl;
+                        noConflict = noConflict->next;
+                    }
+                    stage2 = false;break;
                 case 2:
-                    SortD(head);stage2 = false;break;
+                    SortD(head);
+                    noConflict = head;
+                    while(noConflict){
+                        cout << noConflict->arabic << endl;
+                        noConflict = noConflict->next;
+                    }
+                    stage2 = false;break;
                 default:
                     cout << "Invalid Input" << endl;
                     choice2 = 0;
