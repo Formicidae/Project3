@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1477366751 source:d:\c and c++ programs\project3\main.cpp
+1477453523 source:d:\c and c++ programs\project3\main.cpp
 	<iostream>
 	<fstream>
 	<string>
 	<sstream>
+	<cstring>
 
 1476823303 source:c:\users\eddie\documents\github\project3\main.cpp
 	<iostream>

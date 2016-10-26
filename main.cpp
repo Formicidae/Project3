@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <cstring>
 
 using namespace std;
 
@@ -157,9 +158,16 @@ bool romInvalid(string str){
     for(int i = 0;i < str.length();i++){
         if(str[i] == 'I'){
             for(int j = i;j < str.length();j++){
-                if(str[j] != 'I' && str[j] != 'V' && str[j] != ' '){
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != ' '){
                     return true;
                 }
+                if(str[j] == 'V' && j > i+1){
+                    return true;
+                }
+                if(str[j] == 'X' && j > i+1){
+                    return true;
+                }
+
             }
         }
     }
@@ -180,9 +188,19 @@ bool romInvalid(string str){
     for(int i = 0;i < str.length();i++){
         if(str[i] == 'X'){
             for(int j = i+1;j < str.length();j++){
-                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != ' ')
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'L' && str[j] != 'C' && str[j] != 'X' && str[j] != ' ')
+                    return true;
+
+            if(str[j] == 'L' && j > i+1){
+                return true;
+            }
+            if(str[j] == 'C' && j > i+1){
+                return true;
+            }
+            if(str[j] == 'X' && j > i+2){
                     return true;
             }
+        }
         }
     }
 
@@ -200,8 +218,17 @@ bool romInvalid(string str){
     for(int i = 0;i < str.length();i++){
         if(str[i] == 'C'){
             for(int j = i+1;j < str.length();j++){
-                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != 'C' && str[j] != 'L' && str[j] != ' ')
+                if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X' && str[j] != 'C' && str[j] != 'D' && str[j] != 'L' && str[j] != 'M' && str[j] != ' ')
                     return true;
+                if(str[j] == 'D' && j > i+1){
+                    return true;
+                }
+                if(str[j] == 'M' && j > i+1){
+                    return true;
+                }
+                if(str[j] == 'C' && j > i+2){
+                    return true;
+                }
             }
         }
     }
@@ -222,9 +249,34 @@ bool romInvalid(string str){
             for(int j = i+1;j < str.length();j++){
                 if(str[j] != 'I' && str[j] != 'V' && str[j] != 'X'&& str[j] != 'C'&& str[j] != 'L'&& str[j] != 'D' && str[j] != 'M' && str[j] != ' ')
                     return true;
+                if(str[j] == 'M' && j > i+3){
+                    return true;
+                }
             }
         }
     }
+    char rom[20];
+    strcpy(rom,str.c_str());
+    if(strstr(rom,"IIII"))
+        return true;
+    if(strstr(rom,"IVI"))
+        return true;
+    if(strstr(rom,"IXI"))
+        return true;
+    if(strstr(rom,"XXXX"))
+        return true;
+    if(strstr(rom,"XLX"))
+        return true;
+    if(strstr(rom,"XCX"))
+        return true;
+    if(strstr(rom,"CCCC"))
+        return true;
+    if(strstr(rom,"CDC"))
+        return true;
+    if(strstr(rom,"CMC"))
+        return true;
+    if(strstr(rom,"MMMMM"))
+        return true;
 
     return false;
 }
@@ -444,7 +496,20 @@ int main()
         cout << "\t2\tSort" << endl;
         cout << "\t3\tExit" << endl;
         choice = 0;
-        cin >> choice;
+
+        string input;
+
+        cin >> input;
+        if(input.length() > 1){
+            choice = 4;
+        }
+        else{
+            stringstream i(input);
+            i >> choice;
+        }
+
+
+
         //Checks if input is valid
         switch(choice){
         case 1:
@@ -470,10 +535,10 @@ int main()
                 }
                 //Runs binary search
                 if(binSearch(head2,count,i)){
-                    cout << endl << i << " Was found";
+                    cout << endl << target << " Was found";
                 }
                 else{
-                    cout << endl << i << " Wasn't found";
+                    cout << endl << target << " Wasn't found";
                 }
                 delete head2;
                 break;
@@ -518,9 +583,18 @@ int main()
             while(stage2){
                 cout << endl << "\t1\tby Romman" << endl;
                 cout << "\t2\tby Arabic" << endl;
+
                 int choice2;
-                cin >> choice2;
-                cin.clear();
+                string input;
+
+                cin >> input;
+                if(input.length() > 1){
+                    choice2 = 4;
+                }
+                else{
+                    stringstream i(input);
+                    i >> choice2;
+                }
                 //determines the search to be preformed
                 switch(choice2){
                 case 1:
